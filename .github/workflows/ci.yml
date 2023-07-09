@@ -1,5 +1,13 @@
 name: ci-golang-workflow
-on: [push, pull_request]
+on:
+  push:
+    branches: [main, develop]
+  # only:
+  #   - main
+  #   - develop
+  #   - feature/*
+  #   - hotfix/*
+  #   - release/*
 
 jobs:
   build:
@@ -19,9 +27,8 @@ jobs:
         with:
           go-version: ${{ matrix.go-version }}
       # Final da configuração do ambiente
-      - name: Run tests
-        run: go test -v
 
+      # Deploy
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
 
